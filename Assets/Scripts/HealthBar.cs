@@ -7,29 +7,29 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Slider _healthBar;
     [SerializeField] private Health _health;
 
-    private float _forceSetHealthValue = 0.64f;
+    private float _forceSetHealthValue = 50f;
     private Coroutine _setHealthValue;
 
     private void Awake()
     {
-        ShowHealthValue();
+        _health.Revised += ShowHealthValue;
     }
 
-    public void ShowHealthValue()
+    public void ShowHealthValue(float targetHealth)
     {
         if (_setHealthValue != null)
         {
             StopCoroutine(_setHealthValue);
         }
 
-        _setHealthValue = StartCoroutine(SetTargetValueHealth(_health.CurrentHealth));
+        _setHealthValue = StartCoroutine(SetTargetValueHealth(targetHealth));
     }
 
-    private IEnumerator SetTargetValueHealth(float targetValue)
+    private IEnumerator SetTargetValueHealth(float targetHealth)
     {
-        while (_healthBar.value != targetValue)
+        while (_healthBar.value != targetHealth)
         {
-            _healthBar.value = Mathf.MoveTowards(_healthBar.value, targetValue, _forceSetHealthValue);
+            _healthBar.value = Mathf.MoveTowards(_healthBar.value, targetHealth, _forceSetHealthValue * Time.deltaTime);
             yield return null;
         }
     }

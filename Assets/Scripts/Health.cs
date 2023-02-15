@@ -3,16 +3,34 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     private float _maxHealth = 100f;
+    private float _damage = 10f;
+    private float _heal = 10f;
+    private float _currentHealth = 100f;
 
-    public float CurrentHealth { get; private set; }
+    public delegate void ReviseHealth(float currentHealth);
 
-    private void Awake()
+    public event ReviseHealth Revised;
+
+    private void Start()
     {
-        CurrentHealth = _maxHealth;
+        Revised?.Invoke(_currentHealth);
     }
 
-    public void SetHealthValue(float alterationHealth)
+    public void TakeDamage()
     {
-        CurrentHealth = CurrentHealth - alterationHealth;
+        if (_currentHealth > 0)
+        {
+            _currentHealth = _currentHealth - _damage;
+            Revised?.Invoke(_currentHealth);
+        }
+    }
+
+    public void TakeHeal()
+    {
+        if (_currentHealth < _maxHealth)
+        {
+            _currentHealth = _currentHealth + _heal;
+            Revised?.Invoke(_currentHealth);
+        }
     }
 }
