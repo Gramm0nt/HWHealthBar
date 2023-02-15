@@ -210,7 +210,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 50
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -226,7 +226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b00ef7c77fdee34e861d69e7145977a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slider: {fileID: 3081828}
+  _healthBar: {fileID: 3081828}
+  _health: {fileID: 1891766680}
 --- !u!1 &102063459
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,8 +846,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1891766680}
-        m_TargetAssemblyTypeName: Button, Assembly-CSharp
-        m_MethodName: OnButtonPlusClick
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: SetHealthValue
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: -10
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3081829}
+        m_TargetAssemblyTypeName: HealthBar, Assembly-CSharp
+        m_MethodName: ShowHealthValue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1219,10 +1232,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1891766675}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8eda0b6d6f934846a35574467fc2b77, type: 3}
+  m_Script: {fileID: 11500000, guid: ea1cd75226ca1a445a01f83af8d4b88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBar: {fileID: 3081829}
 --- !u!1 &1896471652
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,8 +1357,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1891766680}
-        m_TargetAssemblyTypeName: Button, Assembly-CSharp
-        m_MethodName: OnButtonMinusClick
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: SetHealthValue
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 10
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3081829}
+        m_TargetAssemblyTypeName: HealthBar, Assembly-CSharp
+        m_MethodName: ShowHealthValue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -5,28 +5,31 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider _healthBar;
+    [SerializeField] private Health _health;
 
-    private float _forceSetHealthValue = 0.05f;
-    private float _targetValue;
+    private float _forceSetHealthValue = 0.64f;
     private Coroutine _setHealthValue;
 
-    public void SetHealth(float health)
+    private void Awake()
     {
-        _targetValue = _healthBar.value - health;
+        ShowHealthValue();
+    }
 
+    public void ShowHealthValue()
+    {
         if (_setHealthValue != null)
         {
             StopCoroutine(_setHealthValue);
         }
 
-        _setHealthValue = StartCoroutine(SetTargetValueHealth());
+        _setHealthValue = StartCoroutine(SetTargetValueHealth(_health.CurrentHealth));
     }
 
-    private IEnumerator SetTargetValueHealth()
+    private IEnumerator SetTargetValueHealth(float targetValue)
     {
-        while (_healthBar.value != _targetValue)
+        while (_healthBar.value != targetValue)
         {
-            _healthBar.value = Mathf.MoveTowards(_healthBar.value, _targetValue, _forceSetHealthValue);
+            _healthBar.value = Mathf.MoveTowards(_healthBar.value, targetValue, _forceSetHealthValue);
             yield return null;
         }
     }
